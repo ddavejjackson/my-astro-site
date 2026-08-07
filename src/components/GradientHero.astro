@@ -1,0 +1,51 @@
+---
+interface Props {
+    postCount: number;
+    categoryCount: number;
+    sinceYear?: number;
+}
+
+const { postCount, categoryCount, sinceYear = 2026 } = Astro.props;
+---
+
+<section class="relative mb-16 py-24 text-center overflow-hidden isolate">
+    <div
+        class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,var(--color-doom-blue)_0%,transparent_70%)] opacity-20"
+    >
+    </div>
+    <div class="relative max-w-2xl mx-auto px-4">
+        <p
+            class="text-sm uppercase tracking-widest text-doom-base6 font-semibold mb-4"
+        >
+            Welcome to Cyber Site
+        </p>
+        <h1
+            class="text-5xl sm:text-6xl font-extrabold tracking-tight text-doom-blue mb-6"
+        >
+            Exploring the systems<span class="text-doom-cyan">.</span>
+        </h1>
+        <p class="text-lg text-doom-base7 leading-relaxed mb-8">
+            Notes on <span class="text-doom-fg">technology</span>, <span
+                class="text-doom-fg">politics</span
+            >, <span class="text-doom-fg">mental health</span> and the ongoing work
+            of learning how both actually shape the world — written as I go, not after
+            I've figured it all out.
+        </p>
+        <div class="w-16 h-1 bg-doom-magenta mx-auto rounded-full mb-10"></div>
+
+        <div class="flex justify-center gap-10 text-sm text-doom-base6">
+            <div>
+                <p class="text-2xl font-bold text-doom-fg">{postCount}</p>
+                <p>Posts</p>
+            </div>
+            <div>
+                <p class="text-2xl font-bold text-doom-fg">{categoryCount}</p>
+                <p>Categories</p>
+            </div>
+            <div>
+                <p class="text-2xl font-bold text-doom-fg">{sinceYear}</p>
+                <p>Since</p>
+            </div>
+        </div>
+    </div>
+</section>

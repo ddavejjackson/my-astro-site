@@ -1,0 +1,53 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Tag from "../../../components/Tag.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("blog");
+    const uniqueTags = [...new Set(posts.flatMap((post) => post.data.tags))];
+
+    return uniqueTags.map((tag) => {
+        const filteredPosts = posts.filter((post) =>
+            post.data.tags.includes(tag),
+        );
+        return {
+            params: { tag },
+            props: { posts: filteredPosts, tag },
+        };
+    });
+}
+
+const { posts, tag } = Astro.props;
+---
+
+<BaseLayout title={`Posts tagged "${tag}"`}>
+    <a
+        href="/blog"
+        class="text-sm text-doom-base6 hover:text-doom-cyan transition-colors"
+        >← All posts</a
+    >
+    <h1 class="text-3xl font-bold text-doom-blue mt-4 mb-8">
+        Posts tagged <span class="text-doom-magenta">#{tag}</span>
+    </h1>
+    <div class="space-y-8">
+        {
+            posts.map((post: any) => (
+                <article class="border-b border-doom-base3 pb-8">
+                    <a
+                        href={`/blog/${post.id}`}
+                        class="text-xl font-medium text-doom-fg hover:text-doom-cyan transition-colors"
+                    >
+                        {post.data.title}
+                    </a>
+                    <p class="text-doom-fg-alt mt-2">{post.data.description}</p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        {post.data.tags.map((t: string) => (
+                            <Tag tag={t} />
+                        ))}
+                    </div>
+                </article>
+            ))
+        }
+    </div>
+</BaseLayout>

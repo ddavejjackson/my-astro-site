@@ -1,0 +1,61 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Tag from "../../components/Tag.astro";
+import CategoryCard from "../../components/CategoryCard.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const categoryCounts = posts.reduce(
+    (acc, post) => {
+        acc[post.data.category] = (acc[post.data.category] ?? 0) + 1;
+        return acc;
+    },
+    {} as Record<string, number>,
+);
+---
+
+<BaseLayout title="Blog">
+    <h1 class="text-3xl font-bold text-doom-blue mb-8">Blog</h1>
+
+    <section class="mb-12">
+        <h2 class="text-lg font-semibold text-doom-fg mb-4">Categories</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            {
+                Object.entries(categoryCounts).map(([category, count]) => (
+                    <CategoryCard category={category} count={count} />
+                ))
+            }
+        </div>
+    </section>
+
+    <div class="space-y-8">
+        {
+            posts.map((post) => (
+                <article class="border-b border-doom-base3 pb-8">
+                    <a
+                        href={`/blog/${post.id}`}
+                        class="text-xl font-medium text-doom-fg hover:text-doom-cyan transition-colors"
+                    >
+                        {post.data.title}
+                    </a>
+                    <p class="text-sm text-doom-base6 mt-1">
+                        {post.data.pubDate.toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                        })}
+                    </p>
+                    <p class="text-doom-fg-alt mt-2">{post.data.description}</p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        {post.data.tags.map((tag: string) => (
+                            <Tag tag={tag} />
+                        ))}
+                    </div>
+                </article>
+            ))
+        }
+    </div>
+</BaseLayout>

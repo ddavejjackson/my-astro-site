@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Tag from "../../components/Tag.astro";
+import { getCollection, render } from "astro:content";
+import { getReadingTime } from "../../lib/readingTime";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("blog");
+    return posts.map((post) => ({
+        params: { slug: post.id },
+        props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const readingTime = getReadingTime(post.body ?? "");
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+    <article>
+        <a
+            href="/blog"
+            class="inline-flex items-center gap-1 text-sm text-doom-base6 hover:text-doom-cyan active:text-doom-cyan transition-colors mb-6"
+        >
+            ← Back to all posts
+        </a>
+
+        <header class="mb-8">
+            <h1 class="text-3xl font-bold text-doom-blue">{post.data.title}</h1>
+            <p class="text-sm text-doom-base6 mt-2 flex items-center gap-2">
+                <span
+                    >{
+                        post.data.pubDate.toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                        })
+                    }</span
+                >
+                <span class="text-doom-base4">·</span>
+                <span>{readingTime}</span>
+            </p>
+            <div class="flex flex-wrap gap-2 mt-4">
+                {post.data.tags.map((tag: string) => <Tag tag={tag} />)}
+            </div>
+        </header>
+
+        <div
+            class="prose prose-invert max-w-none
+      prose-headings:text-doom-blue
+      prose-a:text-doom-cyan prose-a:no-underline hover:prose-a:underline
+      prose-strong:text-doom-orange
+      prose-code:text-doom-green prose-code:bg-doom-base2 prose-code:px-1 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
+      prose-blockquote:border-doom-magenta prose-blockquote:text-doom-fg-alt
+      prose-pre:bg-doom-base1
+      prose-li:marker:text-doom-base6"
+        >
+            <Content />
+        </div>
+
+        <a
+            href="/blog"
+            class="inline-flex items-center gap-1 text-sm
+        text-doom-base6 hover:text-doom-cyan active:text-doom-cyan
+        transition-colors mt-12 pt-6 border-t border-doom-base3"
+        >
+            ← Back to all posts
+        </a>
+    </article>
+</BaseLayout>

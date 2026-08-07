@@ -1,0 +1,37 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Doom One palette */
+  --color-doom-bg: #282c34;
+  --color-doom-bg-alt: #21242b;
+  --color-doom-base0: #1b2229;
+  --color-doom-base1: #1c1f24;
+  --color-doom-base2: #202328;
+  --color-doom-base3: #23272e;
+  --color-doom-base4: #3f444a;
+  --color-doom-base5: #5b6268;
+  --color-doom-base6: #73797e;
+  --color-doom-base7: #9ca0a4;
+  --color-doom-base8: #dfdfdf;
+  --color-doom-fg: #bbc2cf;
+  --color-doom-fg-alt: #5b6268;
+  --color-doom-red: #ff6c6b;
+  --color-doom-orange: #da8548;
+  --color-doom-green: #98be65;
+  --color-doom-teal: #4db5bd;
+  --color-doom-yellow: #ecbe7b;
+  --color-doom-blue: #51afef;
+  --color-doom-dark-blue: #2257a0;
+  --color-doom-magenta: #c678dd;
+  --color-doom-violet: #a9a1e1;
+  --color-doom-cyan: #46d9ff;
+  --color-doom-dark-cyan: #5699af;
+}
+
+body {
+  background-color: var(--color-doom-bg);
+  color: var(--color-doom-fg);
+}

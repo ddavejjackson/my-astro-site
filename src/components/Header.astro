@@ -1,0 +1,29 @@
+---
+import SearchBar from "./SearchBar.astro";
+
+const nav = [
+    { href: "/", label: "Home" },
+    { href: "/blog", label: "Blog" },
+    { href: "/about", label: "About" },
+];
+---
+
+<header class="border-b border-doom-base4">
+    <nav class="max-w-3xl mx-auto flex items-center justify-between px-4 py-4">
+        <a href="/" class="font-semibold text-lg text-doom-blue">Cyber Site</a>
+        <ul class="flex gap-6 text-sm text-doom-orange">
+            {
+                nav.map((item) => (
+                    <li>
+                        <a
+                            href={item.href}
+                            class="hover:text-doom-cyan transition-colors"
+                        >
+                            {item.label}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </nav>
+</header>
