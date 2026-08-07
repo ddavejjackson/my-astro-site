@@ -6,3 +6,5 @@ tags: ["mentalhealth", "schizoaffectivedisorder", "ptsd", "eupd"]
 category: "Mental Health"
 ---
 ## Schizoaffective Disorder
+### What is it?
+Schizoaffective disorder is a "psychotic illness." It is basically a combination of Schizophrenia and Bipolar disorder in my case.
