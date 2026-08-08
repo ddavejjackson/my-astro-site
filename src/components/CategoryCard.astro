@@ -1,5 +1,5 @@
 ---
-import { categoryStyles, defaultCategoryStyle } from "../lib/CategoryColors";
+import { categoryStyle } from "../lib/CategoryColors";
 
 interface Props {
     category: string;
@@ -7,15 +7,16 @@ interface Props {
 }
 
 const { category, count } = Astro.props;
-const style = categoryStyles[category] ?? defaultCategoryStyle;
 ---
 
 <a
     href={`/blog/${category}/posts`}
-    class={`group block rounded-lg border ${style.border} bg-doom-base1 p-5 transition-colors ${style.hover} hover:bg-doom-base2`}
+    class={`group block rounded-lg border ${categoryStyle.border} bg-doom-base1 p-5 transition-colors ${categoryStyle.hover} hover:bg-doom-base2`}
 >
-    <h3 class={`text-lg font-semibold capitalize ${style.text}`}>{category}</h3>
-    <p class="text-sm text-doom-base6 mt-1">
+    <h3 class={`text-lg font-semibold capitalize ${categoryStyle.text}`}>
+        {category}
+    </h3>
+    <p class="text-sm-text-doom-base6 mt-1">
         {count} post{count === 1 ? "" : "s"}
     </p>
 </a>
