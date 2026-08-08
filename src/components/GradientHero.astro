@@ -10,7 +10,8 @@ const { postCount, categoryCount, sinceYear = 2026 } = Astro.props;
 
 <section class="relative mb-16 py-24 text-center overflow-hidden isolate">
     <div
-        class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,var(--color-doom-blue)_0%,transparent_70%)] opacity-20"
+        class="absolute inset-0 pointer-events-none
+bg-[radial-gradient(circle_at_center,var(--color-doom-blue)_0%,transparent_70%)] opacity-20"
     >
     </div>
     <div class="relative max-w-2xl mx-auto px-4">
@@ -19,18 +20,26 @@ const { postCount, categoryCount, sinceYear = 2026 } = Astro.props;
         >
             Welcome to Cyber Site
         </p>
+
         <h1
-            class="text-5xl sm:text-6xl font-extrabold tracking-tight text-doom-blue mb-6"
+            id="type-h1"
+            class="opacity-0 text-5xl sm:text-6xl font-extrabold tracking-tight text-doom-blue mb-6
+min-h-[1.2em]"
         >
             Exploring the systems<span class="text-doom-cyan">.</span>
         </h1>
-        <p class="text-lg text-doom-base7 leading-relaxed mb-8">
+
+        <p
+            id="type-p"
+            class="opacity-0 text-lg text-doom-base7 leading-relaxed mb-8 min-h-[3em]"
+        >
             Notes on <span class="text-doom-fg">technology</span>, <span
                 class="text-doom-fg">politics</span
             >, <span class="text-doom-fg">mental health</span> and the ongoing work
             of learning how both actually shape the world — written as I go, not after
             I've figured it all out.
         </p>
+
         <div class="w-16 h-1 bg-doom-magenta mx-auto rounded-full mb-10"></div>
 
         <div class="flex justify-center gap-10 text-sm text-doom-base6">
@@ -49,3 +58,77 @@ const { postCount, categoryCount, sinceYear = 2026 } = Astro.props;
         </div>
     </div>
 </section>
+
+<style>
+    .cursor {
+        display: inline-block;
+        width: 3px;
+        background-color: var(--color-doom-magenta, #ff00ff);
+        margin-left: 2px;
+        animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+        from,
+        to {
+            background-color: transparent;
+        }
+        50% {
+            background-color: var(--color-doom-magenta, #ff00ff);
+        }
+    }
+</style>
+
+<script>
+    function typewriter(elementId: string, speed: number) {
+        const element = document.getElementById(elementId);
+        if (!element) return;
+
+        element.style.opacity = "1";
+
+        const fullText = element.innerHTML;
+        element.innerHTML = "";
+
+        const cursorHeight = elementId === "type-h1" ? "0.8em" : "1em";
+        let i = 0;
+        let currentHTML = "";
+
+        function type() {
+            if (i < fullText.length) {
+                const char = fullText[i];
+
+                if (char === "<") {
+                    let tag = "";
+                    while (i < fullText.length && fullText[i] !== ">") {
+                        tag += fullText[i];
+                        i++;
+                    }
+                    tag += ">";
+                    currentHTML += tag;
+                    i++;
+                } else {
+                    currentHTML += char;
+                    i++;
+                }
+
+                element.innerHTML =
+                    currentHTML +
+                    `<span class="cursor"
+style="height:${cursorHeight}"></span>`;
+                setTimeout(type, speed);
+            } else {
+                element.innerHTML = currentHTML;
+            }
+        }
+
+        type();
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+        typewriter("type-h1", 50);
+
+        setTimeout(() => {
+            typewriter("type-p", 20);
+        }, 1500);
+    });
+</script>
