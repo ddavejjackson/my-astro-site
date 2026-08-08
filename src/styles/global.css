@@ -1,8 +1,10 @@
+@import "@fontsource/quicksand/index.css";
+
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Quicksand", ui-sans-serif, system-ui, sans-serif;
 
   /* Doom One palette */
   --color-doom-bg: #282c34;
