@@ -11,7 +11,7 @@ const { category, count } = Astro.props;
 
 <a
     href={`/blog/${category}/posts`}
-    class={`group block rounded-lg border ${categoryStyle.border} bg-doom-base1 p-5 transition-colors ${categoryStyle.hover} hover:bg-doom-base2`}
+    class={`group block rounded-lg border ${categoryStyle.border} bg-doom-base1 p-5 transition-all duration-200 ease-in-out ${categoryStyle.hover} hover:bg-doom-base2 hover:scale-105 hover:shadow-lg hover:shadow-black/40 active:scale-105 active:bg-doom-base2 active:shadow-lg active:shadow-black/40`}
 >
     <h3 class={`text-lg font-semibold capitalize ${categoryStyle.text}`}>
         {category}
