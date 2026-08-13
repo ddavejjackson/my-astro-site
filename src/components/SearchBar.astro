@@ -3,33 +3,45 @@
 ---
 
 <form
-    action="https://www.google.com/search"
-    method="get"
-    target="_blank"
-    class="flex items-center gap-3 rounded-lg border border-doom-magenta bg-doom-base1 px-4 py-3 focus-within:border-doom-violet transition-colors"
+  action="https://www.google.com/search"
+  method="get"
+  target="_blank"
+  class="flex items-center gap-2 sm:gap-3 rounded-lg border border-doom-magenta bg-doom-base1 pl-4 pr-1.5 py-1.5 sm:py-2 focus-within:border-doom-violet transition-colors"
 >
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    class="w-5 h-5 text-doom-base6 flex-shrink-0"
+  >
+    <circle cx="11" cy="11" r="7"></circle>
+    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+  <input
+    type="text"
+    name="q"
+    placeholder="Search Google..."
+    required
+    class="min-w-0 flex-1 bg-transparent text-base sm:text-lg text-doom-fg placeholder-doom-base6 focus:outline-none"
+  />
+  <button
+    type="submit"
+    aria-label="Search"
+    class="flex-shrink-0 flex items-center gap-1.5 rounded-md bg-doom-blue text-doom-base1 font-medium text-sm sm:text-base px-3 sm:px-4 py-2 hover:bg-doom-cyan transition-colors"
+  >
+    <span class="hidden sm:inline">Go</span>
     <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        class="w-5 h-5 text-doom-base6 flex-shrink-0"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      class="w-4 h-4"
     >
-        <circle cx="11" cy="11" r="7"></circle>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+      <polyline points="12 5 19 12 12 19"></polyline>
     </svg>
-    <input
-        type="text"
-        name="q"
-        placeholder="Search Google..."
-        required
-        class="flex-1 bg-transparent text-lg text-doom-fg placeholder-doom-base6 focus:outline-none"
-    />
-    <button
-        type="submit"
-        class="text-lg font-medium bg-doom-base1 text-doom-base8 hover:text-doom-blue transition-colors px-2"
-    >
-        Go
-    </button>
+  </button>
 </form>
